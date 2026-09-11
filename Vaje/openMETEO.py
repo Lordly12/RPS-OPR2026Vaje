@@ -13,13 +13,22 @@ def temp_7dni(lat, lon):
     base_url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&hourly=temperature_2m"
     call = requests.get(base_url).json()
     print(call["hourly"]["temperature_2m"])
-temp_7dni(12.3, 21.4)
+temp_7dni(45.12, 14.5)
 
 #Ugotovi, kateri dan bo najtoplejši oz. najhladnejši, in izpiši datum ter temperaturo.
 def temp_7dni(lat, lon):
-    base_url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&hourly=temperature_2m"
+    base_url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&daily=temperature_2m_max,temperature_2m_min&timezone=auto"
     call = requests.get(base_url).json()
-    print(call["hourly"]["temperature_2m"])
-    for i in temperatura()
-        if i > temperatura
-temp_7dni(12.3, 21.4)
+
+    datumi = call["daily"]["time"]
+    temperature_max = call["daily"]["temperature_2m_max"]
+    temperature_min = call["daily"]["temperature_2m_min"]
+
+    najtoplejsi = temperature_max.index(max(temperature_max))
+    najhladnejsi = temperature_min.index(min(temperature_min))
+
+    print("Najtoplejši dan:", datumi[najtoplejsi], temperature_max[najtoplejsi], "°C")
+    print("Najhladnejši dan:", datumi[najhladnejsi], temperature_min[najhladnejsi], "°C")
+
+
+temp_7dni(45.12, 14.5)
