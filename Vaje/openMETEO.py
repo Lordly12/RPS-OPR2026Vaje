@@ -23,12 +23,10 @@ def temp_7dni(lat, lon):
     datumi = call["daily"]["time"]
     temperature_max = call["daily"]["temperature_2m_max"]
     temperature_min = call["daily"]["temperature_2m_min"]
+    print(temperature_min),(temperature_max)
+temp_7dni(45.12, 14.5)
 
-    najtoplejsi = temperature_max.index(max(temperature_max))
-    najhladnejsi = temperature_min.index(min(temperature_min))
 
-    print("Najtoplejši dan:", datumi[najtoplejsi], temperature_max[najtoplejsi], "°C")
-    print("Najhladnejši dan:", datumi[najhladnejsi], temperature_min[najhladnejsi], "°C")
 temp_7dni(45.12, 14.5)
 #Ugotovi, kateri dan ima največjo razliko med dnevno in nočno temperaturo.
 def temp_7dni(lat, lon):
