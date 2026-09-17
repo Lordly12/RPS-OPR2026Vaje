@@ -81,7 +81,32 @@ for c in cities[:4]:
 
 #trenutna_temperatura2(45.12,14.5)
 #ki bo danes najtoplejše oz. najhladnejše
+import requests
 
+def temperatura_danes(lat, lon):
+    base_url = "https://api.open-meteo.com/v1/forecast"
+    params = {
+        "latitude": lat,
+        "longitude": lon,
+        "daily": "temperature_2m_max,temperature_2m_min",
+        "timezone": "auto",
+        "forecast_days": 1
+    }
+
+    response = requests.get(base_url, params=params)
+    data = response.json()
+
+    return data["daily"]["temperature_2m_max"][0], data["daily"]["temperature_2m_min"][0]
+
+
+rezultati = []
+
+for c in cities:
+    max_temp, min_temp = temperatura_danes(c[1], c[2])
+    rezultati.append((c[0], max_temp, min_temp))
+
+for mesto, max_temp, min_temp in rezultati:
+    print(mesto, "max:", max_temp, "°C", "min:", min_temp, "°C")
 
 
 
